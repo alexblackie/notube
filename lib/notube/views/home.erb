@@ -3,13 +3,14 @@
 </header>
 <div class="video-cards">
   <% @videos.each do |v| %>
-  <div class="video-card">
+  <div class="video-card<% if v[3].nil? %> fresh<% end %>">
+    <div class="fresh-dot"></div>
     <a href="/videos/<%= v[0] %>">
-      <img src="/data/<%= v[4] %>/<%= v[1] %>.jpg">
-        <%= v[2] %></a>
+      <img src="/data/<%= v[5] %>/<%= v[1] %>.jpg">
+      <span><%= v[2] %></span>
     </a>
     <div class="video-card-channel">
-      <a href="/channel/<%= v[3] %>"><%= v[5] %></a></li>
+      <a href="/channel/<%= v[4] %>"><%= v[6] %></a></li>
     </div>
   </div>
   <% end %>

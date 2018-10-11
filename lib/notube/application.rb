@@ -8,8 +8,8 @@ module Notube
       @channels = settings.db.execute("select id,external_id,name from channels")
 
       columns = [
-        "videos.id", "videos.external_id", "videos.title", "channels.id",
-        "channels.external_id", "channels.name"
+        "videos.id", "videos.external_id", "videos.title", "videos.watched_at",
+        "channels.id", "channels.external_id", "channels.name"
       ].join(",")
       @videos = settings.db.execute("select #{ columns } from videos " +
                   "inner join channels on videos.channel_id = channels.id " +
@@ -28,6 +28,9 @@ module Notube
       @video = settings.db.execute("select #{ columns } from videos " +
                  "inner join channels on videos.channel_id = channels.id " +
                  "where videos.id = ?", params[:id]).first
+
+      settings.db.execute("update videos set watched_at = datetime('now') where id = ?", params[:id])
+
       erb :video
     end
 

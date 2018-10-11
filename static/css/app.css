@@ -62,14 +62,30 @@ body {
   flex-wrap: wrap;
 }
 .video-card {
+  position: relative;
   box-sizing: border-box;
   padding: 0.5em;
   max-width: 20%;
+}
+.video-card.fresh .fresh-dot {
+  display: block;
 }
   .video-card img {
     max-width: 100%;
     height: auto;
   }
+
+.fresh-dot {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    background: orange;
+    border-radius: 100%;
+  }
+
 
 /*******************************************************************************
  * Video Player Page
