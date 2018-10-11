@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS videos (
   description text,
   channel_id integer,
   watched_at timestamp,
-  created_at timestamp default CURRENT_DATE
+  published_at timestamp
 )
 SQL
 
@@ -125,8 +125,8 @@ CONFIG["youtube_channels"].each do |channel_url|
     resp = JSON.parse(resp.body)
     v = resp["items"].first
 
-    DB.execute("insert into videos (external_id,title,description,channel_id) values(?, ?, ?, ?)",
-               video_id, v["snippet"]["title"], v["snippet"]["description"], channel_id)
+    DB.execute("insert into videos (external_id,title,description,channel_id,published_at) values(?, ?, ?, ?, ?)",
+               video_id, v["snippet"]["title"], v["snippet"]["description"], channel_id, v["snippet"]["publishedAt"])
 
     acc += 1
   end

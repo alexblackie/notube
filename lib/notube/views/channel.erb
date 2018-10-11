@@ -1,0 +1,15 @@
+<header class="channel-header" style="background-image: url('/data/<%= @channel[1] %>.banner.jpg'); background-position: cover;">
+  <h2><%= @channel[2] %></h2>
+</header>
+
+<div class="video-cards">
+  <% @videos.each do |v| %>
+    <%= erb :video_card, locals: { v: v } %>
+  <% end %>
+</div>
+
+<div class="channel-pagination">
+  <% if @next_offset %>
+  <a href="?before=<%= @next_offset %>">Next Page</a>
+  <% end %>
+</div>

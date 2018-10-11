@@ -3,15 +3,6 @@
 </header>
 <div class="video-cards">
   <% @videos.each do |v| %>
-  <div class="video-card<% if v[3].nil? %> fresh<% end %>">
-    <div class="fresh-dot"></div>
-    <a href="/videos/<%= v[0] %>">
-      <img src="/data/<%= v[5] %>/<%= v[1] %>.jpg">
-      <span><%= v[2] %></span>
-    </a>
-    <div class="video-card-channel">
-      <a href="/channel/<%= v[4] %>"><%= v[6] %></a></li>
-    </div>
-  </div>
+    <%= erb :video_card, locals: { v: v } %>
   <% end %>
 </div>
