@@ -8,8 +8,8 @@
 #     storage_path: /srv/vids
 #     storage_path: mytube
 #
-# Default: data
-storage_path: data
+# Default: static/data
+storage_path: static/data
 
 # The API key to access the Youtube Data API v3. You can generate one through
 # the Google Developer Console here:

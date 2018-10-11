@@ -84,17 +84,17 @@ CONFIG["youtube_channels"].each do |channel_url|
     title = resp["items"].first["snippet"]["title"]
     DB.execute("insert into channels (external_id, name, url) values (?, ?, ?)", external_id, title, channel_url)
 
-    File.open("data/#{ external_id }.banner.jpg", "wb") do |banner|
+    File.open("#{ CONFIG["storage_path"] }/#{ external_id }.banner.jpg", "wb") do |banner|
       open(resp["items"].first["brandingSettings"]["image"]["bannerImageUrl"], "rb") do |remote_image|
         banner.write(remote_image.read)
       end
-    end unless File.exist?("data/#{ external_id }.banner.jpg")
+    end unless File.exist?("#{ CONFIG["storage_path"] }/#{ external_id }.banner.jpg")
 
-    File.open("data/#{ external_id }.jpg", "wb") do |thumb|
+    File.open("#{ CONFIG["storage_path"] }/#{ external_id }.jpg", "wb") do |thumb|
       open(resp["items"].first["snippet"]["thumbnails"]["high"]["url"], "rb") do |remote_image|
         thumb.write(remote_image.read)
       end
-    end unless File.exist?("data/#{ external_id }.jpg")
+    end unless File.exist?("#{ CONFIG["storage_path "] }/#{ external_id }.jpg")
 
     channel_row = DB.execute("select id,external_id,name from channels where external_id = ?", external_id)
   end
@@ -110,7 +110,7 @@ CONFIG["youtube_channels"].each do |channel_url|
     `#{ YOUTUBE_DL } --download-archive ../#{ external_id }.index "#{ channel_url }"`
   end
 
-  video_ids = File.read("data/#{ external_id }.index").lines.map{|l| l.split.last}
+  video_ids = File.read("#{ CONFIG["storage_path"] }/#{ external_id }.index").lines.map{|l| l.split.last}
   DB.execute("select external_id from videos where channel_id = ?", channel_id) do |row|
     # TODO performance??
     video_ids.delete(row.first)
