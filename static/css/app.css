@@ -3,7 +3,7 @@
  ******************************************************************************/
 
 :root {
-  --color-highlight: #6bcbef;
+  --color-highlight: teal;
   --color-background-grey: whitesmoke;
 
   --padding-header: 1em;
@@ -17,6 +17,10 @@
 body {
   margin: 0;
   font-family: sans-serif;
+}
+
+a {
+  color: var(--color-highlight);
 }
 
 
@@ -46,10 +50,40 @@ body {
   width: 20rem;
   background-color: var(--color-background-grey);
 }
+  .app-sidebar h2 {
+    margin: 1rem 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .app-sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .app-sidebar img {
+    border-radius: 100%;
+  }
+  .app-sidebar a {
+    display: flex;
+    padding: 0.5em;
+    text-decoration: none;
+  }
+    .app-sidebar a:hover {
+      background-color: gainsboro;
+    }
+    .app-sidebar a img {
+      margin-right: 0.25em;
+    }
+
 .app-content {
   width: 100%;
   padding: 1em;
 }
+  .app-content h2 {
+    margin: 0 0 1rem 0;
+  }
 
 
 /*******************************************************************************
@@ -74,6 +108,11 @@ body {
     max-width: 100%;
     height: auto;
   }
+  .video-card-channel a {
+    font-size: 0.8em;
+    color: inherit;
+    text-decoration: none;
+  }
 
 .fresh-dot {
     display: none;
@@ -90,6 +129,23 @@ body {
 /*******************************************************************************
  * Video Player Page
  ******************************************************************************/
+
+.video header {
+  margin: 1rem 0;
+}
+  .video header h2 {
+    margin: 0;
+  }
+.video .video-channel a {
+    display: flex;
+    align-items: center;
+  }
+.video .video-channel img {
+  margin-right: 0.25rem;
+}
+
 .video-description {
+  padding: 2rem 6rem;
   white-space: pre-wrap;
+  line-height: 1.5em;
 }

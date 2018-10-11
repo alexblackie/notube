@@ -1,7 +1,12 @@
 <div class="video">
   <header>
-    <h1><%= @video[2] %></h1>
-    <div class="video-channel"><%= @video[6] %>
+    <h2><%= @video[2] %></h2>
+    <div class="video-channel">
+      <a href="/channels/<%= @video[4] %>">
+        <img src="/data/<%= @video[5] %>.jpg" width="24" height="24">
+        <span><%= @video[6] %></span>
+      </a>
+    </div>
   </header>
 
   <div class="video-player">
@@ -11,6 +16,6 @@
   </div>
 
   <div class="video-description">
-    <%= @video[3] %>
+<%= @video[3] %>
   </div>
 </div>
