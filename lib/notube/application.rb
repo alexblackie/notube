@@ -18,5 +18,18 @@ module Notube
       erb :home
     end
 
+    get "/videos/:id" do
+      @channels = settings.db.execute("select id,external_id,name from channels")
+
+      columns = [
+        "videos.id", "videos.external_id", "videos.title", "videos.description",
+        "channels.id", "channels.external_id", "channels.name"
+      ].join(",")
+      @video = settings.db.execute("select #{ columns } from videos " +
+                 "inner join channels on videos.channel_id = channels.id " +
+                 "where videos.id = ?", params[:id]).first
+      erb :video
+    end
+
   end
 end

@@ -1,0 +1,16 @@
+<div class="video">
+  <header>
+    <h1><%= @video[2] %></h1>
+    <div class="video-channel"><%= @video[6] %>
+  </header>
+
+  <div class="video-player">
+    <video width="100%" controls="controls" poster="/data/<%= @video[5] %>/<%= @video[1] %>.jpg">
+      <source src="/data/<%= @video[5] %>/<%= @video[1] %>.webm">
+    </video>
+  </div>
+
+  <div class="video-description">
+    <%= @video[3] %>
+  </div>
+</div>
