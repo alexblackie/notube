@@ -1,0 +1,16 @@
+<header class="video-cards-header">
+  <h2>latest 10</h2>
+</header>
+<div class="video-cards">
+  <% @videos.each do |v| %>
+  <div class="video-card">
+    <a href="/videos/<%= v[0] %>">
+      <img src="/data/<%= v[4] %>/<%= v[1] %>.jpg">
+        <%= v[2] %></a>
+    </a>
+    <div class="video-card-channel">
+      <a href="/channel/<%= v[3] %>"><%= v[5] %></a></li>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -1,0 +1,72 @@
+/*******************************************************************************
+ * Variables
+ ******************************************************************************/
+
+:root {
+  --color-highlight: #6bcbef;
+  --color-background-grey: whitesmoke;
+
+  --padding-header: 1em;
+}
+
+
+/*******************************************************************************
+ * Global
+ ******************************************************************************/
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+
+/*******************************************************************************
+ * Layout and Structure
+ ******************************************************************************/
+
+.app-header {
+  padding: var(--padding-header);
+  background-color: var(--color-highlight);
+}
+  .app-header h1 {
+    margin: 0;
+    font-size: 1em;
+  }
+  .app-header a {
+    text-decoration: none;
+    color: white;
+  }
+
+.app-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.app-sidebar {
+  width: 20rem;
+  background-color: var(--color-background-grey);
+}
+.app-content {
+  width: 100%;
+  padding: 1em;
+}
+
+
+/*******************************************************************************
+ * Video Grid
+ ******************************************************************************/
+
+.video-cards {
+  display: flex;
+  flex-direction: space-between;
+  flex-wrap: wrap;
+}
+.video-card {
+  box-sizing: border-box;
+  padding: 0.5em;
+  max-width: 20%;
+}
+  .video-card img {
+    max-width: 100%;
+    height: auto;
+  }
