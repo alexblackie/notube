@@ -1,0 +1,32 @@
+---
+
+# The path on-disk to store downloaded video files. Can be a relative or
+# absolute path.
+#
+# Examples:
+#
+#     storage_path: /srv/vids
+#     storage_path: mytube
+#
+# Default: data
+storage_path: data
+
+# The API key to access the Youtube Data API v3. You can generate one through
+# the Google Developer Console here:
+#
+#     https://console.developers.google.com/apis/api/youtube.googleapis.com/credentials
+#
+# Default: (none)
+youtube_api_key:
+
+# A list of URLs to Youtube channel web pages. These will be scraped and
+# fetch all videos, and re-scraped periodically to fetch new videos.
+#
+# Example:
+#
+#     youtube_channels:
+#       - "https://www.youtube.com/channel/UCxsMiu1Ghxc2lH0v7wEM0Mg"
+#       - "https://www.youtube.com/user/Perfume"
+#
+# Default: []
+youtube_channels: []
