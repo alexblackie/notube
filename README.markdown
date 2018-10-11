@@ -27,7 +27,14 @@ Then you can install dependencies:
 $ bundle install
 ```
 
-Before you can run anything, you'll need to configure it:
+And set up your database schema. We expect a file in the project root with a
+name of `library.db`:
+
+```
+$ sqlite3 library.db < schema.sql
+```
+
+Before you can run anything else, you'll need to configure the app:
 
 ```
 $ cp config.yml.example config.yml

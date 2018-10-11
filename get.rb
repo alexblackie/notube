@@ -19,30 +19,6 @@ YOUTUBE_DL = "/usr/bin/youtube-dl --id -w --write-thumbnail -f webm/bestaudio".f
 
 
 # ------------------------------------------------------------------------------
-# Database setup
-# ------------------------------------------------------------------------------
-DB.execute <<SQL
-CREATE TABLE IF NOT EXISTS videos (
-  id integer primary key,
-  external_id varchar(255),
-  title varchar(255),
-  description text,
-  channel_id integer,
-  watched_at timestamp,
-  published_at timestamp
-)
-SQL
-
-DB.execute <<SQL
-CREATE TABLE IF NOT EXISTS channels (
-  id integer primary key,
-  external_id varchar(255),
-  url varchar(255),
-  name varchar(255)
-)
-SQL
-
-# ------------------------------------------------------------------------------
 # Helper functions
 # ------------------------------------------------------------------------------
 def api_path(path)
