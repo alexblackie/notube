@@ -10,12 +10,23 @@ module Notube
     set :storage_path, CONFIG["storage_path"]
 
     get "/" do
+      @page_class = "page-home"
+      @channels = settings.db.execute("select id,external_id,name from channels")
+      @videos = settings.db.select(Models::Video, <<-SQL)
+        select * from videos where watched_at is null order by videos.published_at desc limit 10
+      SQL
+
+      erb :next
+    end
+
+    get "/recent" do
+      @page_class = "page-recent"
       @channels = settings.db.execute("select id,external_id,name from channels")
       @videos = settings.db.select(Models::Video, <<-SQL)
         select * from videos order by videos.published_at desc limit 10
       SQL
 
-      erb :home
+      erb :recent
     end
 
     get "/videos/:id" do
