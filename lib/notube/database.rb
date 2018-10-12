@@ -13,9 +13,7 @@ module Notube
     # @param id [Integer] the ID to find
     # @return [model|nil] an instance of <model> with the row data; nil if not found.
     def find(model, id)
-      row = @db.execute("select * from #{ model::TABLE_NAME } where #{ model::TABLE_NAME }.id = ? limit 1", id).first
-      return nil unless row
-      model.new(row)
+      find_by(model, :id, id)
     end
 
     # Find a model by the given field.
@@ -25,8 +23,9 @@ module Notube
     # @param value [String] the value of the column to find
     # @return [model|nil] an instance of <model> with the row data; nil if not found.
     def find_by(model, field, value)
-      row = @db.execute("select * from #{ model::TABLE_NAME } where #{ model::TABLE_NAME }.#{ field } = ? limit 1", value).first
-      return nil unless row
+      result = @db.query("select * from #{ model::TABLE_NAME } where #{ model::TABLE_NAME }.#{ field } = ? limit 1", value)
+      row = result.next_hash
+      return nil if row.nil?
       model.new(row)
     end
 
@@ -35,5 +34,26 @@ module Notube
       @db.execute(*args)
     end
 
+    def select(model, *args)
+      query(*args).map do |row|
+        model.new(row)
+      end
+    end
+
+    def query(*args)
+      return enum_for(:query, *args) unless block_given?
+      result = @db.query(*args)
+      result.each_hash do |row|
+        yield row
+      end
+    end
+
+    def create_database
+      if @db.execute("SELECT name FROM sqlite_master").empty?
+        warn "Creating database..."
+        schema_statements = File.read("schema.sql")
+        @db.execute_batch(schema_statements)
+      end
+    end
   end
 end

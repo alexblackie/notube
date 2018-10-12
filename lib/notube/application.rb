@@ -11,10 +11,9 @@ module Notube
 
     get "/" do
       @channels = settings.db.execute("select id,external_id,name from channels")
-      @videos = settings.db.execute("select * from videos " +
-                  "order by videos.published_at desc limit 10").map do |row|
-                    Models::Video.new(row)
-                  end
+      @videos = settings.db.select(Models::Video, <<-SQL)
+        select * from videos order by videos.published_at desc limit 10
+      SQL
 
       erb :home
     end
@@ -22,9 +21,9 @@ module Notube
     get "/videos/:id" do
       @channels = settings.db.execute("select id,external_id,name from channels")
 
-      row = settings.db.execute("select * from videos " +
-              "where videos.id = ?", params[:id]).first
-      @video = Models::Video.new(row)
+      @video = settings.db.select(Models::Video, <<-SQL, params[:id]).first
+        select * from videos where videos.id = ?
+      SQL
 
       settings.db.execute("update videos set watched_at = CURRENT_TIMESTAMP where id = ?", params[:id])
 
@@ -36,11 +35,12 @@ module Notube
 
       @channels = settings.db.execute("select id,external_id,name from channels")
       @channel = settings.db.find(Models::Channel, params[:id])
-      video_rows = settings.db.execute("select * from videos " +
-        "inner join channels on videos.channel_id = channels.id " +
-        "where videos.channel_id = ? and published_at < ? " +
-        "order by published_at desc limit 25", params[:id], params[:before])
-      @videos = video_rows.map{|row| Models::Video.new(row) }
+      @videos = settings.db.select(Models::Video, <<-SQL, params[:id], params[:before])
+        select * from videos
+        inner join channels on videos.channel_id = channels.id
+        where videos.channel_id = ? and published_at < ?
+        order by published_at desc limit 25
+      SQL
 
       @next_offset = @videos.last.published_at unless @videos.empty?
 
