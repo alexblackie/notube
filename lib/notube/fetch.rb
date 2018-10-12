@@ -79,9 +79,16 @@ module Notube
         storage_dir = File.join(@storage_path, channel.external_id)
         FileUtils.mkdir_p(storage_dir)
 
+        # None of these are guaranteed to exist
+        thumb = snippet["thumbnails"]["maxres"] ||
+                snippet["thumbnails"]["standard"] ||
+                snippet["thumbnails"]["high"] ||
+                snippet["thumbnails"]["medium"] ||
+                snippet["thumbnails"]["default"]
+
         download_image(
           local: "#{ storage_dir }/#{ snippet["resourceId"]["videoId"] }.jpg",
-          remote: snippet["thumbnails"]["standard"]["url"]
+          remote: thumb["url"]
         )
 
         @db.execute("insert into videos (external_id,title,description,channel_id,published_at) values(?, ?, ?, ?, ?)",
