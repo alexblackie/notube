@@ -38,6 +38,10 @@ module Notube
       @db.execute(*args)
     end
 
+    def execute_batch(*args)
+      @db.execute_batch(*args)
+    end
+
     def select(model, *args)
       query(*args).map do |row|
         model.new(row)
