@@ -21,22 +21,22 @@
       This video has not yet been downloaded.
       <a href="/download/<%= @video.id %>" id="downloadLink">Begin Download</a>
     </div>
+
+    <script>
+      (function () {
+        let downloadLink = document.getElementById("downloadLink");
+
+        downloadLink.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          fetch(ev.currentTarget.getAttribute("href")).then(() => {
+            window.location.reload()
+          })
+        })
+      })();
+    </script>
   <% end %>
 
   <div class="video-description">
 <%= @video.description %>
   </div>
 </div>
-
-<script>
-  (function () {
-    let downloadLink = document.getElementById("downloadLink");
-
-    downloadLink.addEventListener("click", function(ev) {
-      ev.preventDefault();
-      fetch(ev.currentTarget.getAttribute("href")).then(() => {
-        window.location.reload()
-      })
-    })
-  })();
-</script>
