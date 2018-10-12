@@ -4,6 +4,10 @@ require "open-uri"
 require "faraday"
 require "sqlite3"
 
+$LOAD_PATH.unshift "#{__dir__}/lib"
+require "notube"
+Notube.create_database
+
 require "pry"
 
 # ------------------------------------------------------------------------------
