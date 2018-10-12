@@ -15,7 +15,7 @@ DB = SQLite3::Database.new("library.db")
 
 YOUTUBE_API_URL = "https://www.googleapis.com/".freeze
 YOUTUBE_API_PREFIX = "/youtube/v3".freeze
-YOUTUBE_DL = "/usr/bin/youtube-dl --id -w --write-thumbnail -f webm/bestaudio".freeze
+YOUTUBE_DL = "/usr/bin/youtube-dl".freeze
 
 
 # ------------------------------------------------------------------------------
@@ -31,6 +31,12 @@ end
 api = Faraday.new(url: YOUTUBE_API_URL) do |faraday|
   faraday.request :url_encoded
   faraday.adapter Faraday.default_adapter
+end
+
+def cmd(*args)
+  puts args.join(" ")
+  ret = system(*args)
+  raise "command failed: #{args.inspect}" unless ret
 end
 
 CONFIG["youtube_channels"].each do |channel_url|
@@ -83,7 +89,7 @@ CONFIG["youtube_channels"].each do |channel_url|
   Dir.mkdir(storage_dir) unless File.exist?(storage_dir)
   Dir.chdir(storage_dir) do
     puts "Updating #{ channel_url }"
-    `#{ YOUTUBE_DL } --download-archive ../#{ external_id }.index "#{ channel_url }"`
+    cmd(*%W[#{YOUTUBE_DL} --id -w --write-thumbnail -f webm/bestaudio --download-archive ../#{ external_id }.index #{ channel_url }])
   end
 
   video_ids = File.read("#{ CONFIG["storage_path"] }/#{ external_id }.index").lines.map{|l| l.split.last}
