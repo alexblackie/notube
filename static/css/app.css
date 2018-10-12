@@ -3,9 +3,17 @@
  ******************************************************************************/
 
 :root {
-  --color-highlight: teal;
-  --color-background-grey: whitesmoke;
+  --palette-teal: #00a0a0;
+  --palette-pink: #e667ca;
+  --palette-white-dark: whitesmoke;
+  --palette-grey: gainsboro;
 
+  --color-highlight: var(--palette-teal);
+  --color-highlight-alt: var(--palette-pink);
+  --color-background-grey: var(--palette-white-dark);
+  --color-border: var(--palette-grey);
+
+  --height-header: 2rem;
   --padding-header: 1em;
 }
 
@@ -30,6 +38,7 @@ a {
 
 .app-header {
   padding: var(--padding-header);
+  height: var(--height-header);
   background-color: var(--color-highlight);
 }
   .app-header h1 {
@@ -37,8 +46,15 @@ a {
     font-size: 1em;
   }
   .app-header a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: white;
+  }
+  .app-header img {
+    height: var(--height-header);
+    width: var(--height-header);
+    margin-right: 0.5rem;
   }
 
 .app-wrapper {
@@ -71,7 +87,7 @@ a {
     text-decoration: none;
   }
     .app-sidebar a:hover {
-      background-color: gainsboro;
+      background-color: var(--color-border);
     }
     .app-sidebar a img {
       margin-right: 0.25em;
@@ -126,7 +142,7 @@ a {
     right: 0;
     width: 1em;
     height: 1em;
-    background: orange;
+    background: var(--color-highlight-alt);
     border-radius: 100%;
   }
 
