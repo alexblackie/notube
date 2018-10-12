@@ -1,10 +1,9 @@
 module Notube
   class Database
 
-    DATABASE_NAME = "library.db".freeze
-
     def initialize
-      @db = SQLite3::Database.new(DATABASE_NAME)
+      environment = ENV.fetch("RACK_ENV", "development")
+      @db = SQLite3::Database.new("#{ environment }.db")
     end
 
     # Find a model by its ID.
