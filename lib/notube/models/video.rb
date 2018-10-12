@@ -5,7 +5,7 @@ module Notube
       TABLE_NAME = "videos".freeze
 
       attr_accessor :id, :external_id, :title, :description, :channel_id,
-                    :watched_at, :published_at, :downloaded_at, :url, :name
+                    :watched_at, :published_at, :downloaded_at, :url, :name, :playlist_id
 
       # Has this video been watched?
       #
