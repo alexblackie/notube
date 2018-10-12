@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'irb'
+$LOAD_PATH.unshift "#{__dir__}/../lib"
+require 'notube'
+
+App = Notube::Application
+DB = App.settings.db
+
+IRB.start
