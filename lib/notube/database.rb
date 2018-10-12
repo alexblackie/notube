@@ -47,5 +47,13 @@ module Notube
         yield row
       end
     end
+
+    def create_database
+      if @db.execute("SELECT name FROM sqlite_master").empty?
+        warn "Creating database..."
+        schema_statements = File.read("schema.sql")
+        @db.execute_batch(schema_statements)
+      end
+    end
   end
 end
