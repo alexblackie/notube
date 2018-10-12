@@ -3,6 +3,6 @@
 </header>
 <div class="video-cards">
   <% @videos.each do |v| %>
-    <%= erb :video_card, locals: { v: v } %>
+    <%= erb :video_card, locals: { video: v } %>
   <% end %>
 </div>

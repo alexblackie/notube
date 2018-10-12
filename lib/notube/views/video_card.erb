@@ -1,10 +1,10 @@
-  <div class="video-card<% if v[5].nil? %> fresh<% end %>">
+  <div class="video-card<% unless video.watched? %> fresh<% end %>">
     <div class="fresh-dot"></div>
-    <a href="/videos/<%= v[0] %>">
-      <img src="/data/<%= v[8] %>/<%= v[1] %>.jpg">
-      <span><%= v[2] %></span>
+    <a href="/videos/<%= video.id %>">
+      <img src="/data/<%= video.channel.external_id %>/<%= video.external_id %>.jpg">
+      <span><%= video.title %></span>
     </a>
     <div class="video-card-channel">
-      <a href="/channels/<%= v[7] %>"><%= v[10] %></a></li>
+      <a href="/channels/<%= video.channel_id %>"><%= video.channel.name %></a></li>
     </div>
   </div>
