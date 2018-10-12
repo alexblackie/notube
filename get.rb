@@ -62,6 +62,11 @@ CONFIG["youtube_channels"].each do |channel_url|
     resp = api.get(api_path("channels"), opts)
     resp = JSON.parse(resp.body)
 
+    if resp["items"].empty?
+      warn "Could not find channel #{ channel_url }. Skipping"
+      next
+    end
+
     external_id = resp["items"].first["id"]
     title = resp["items"].first["snippet"]["title"]
     DB.execute("insert into channels (external_id, name, url) values (?, ?, ?)", external_id, title, channel_url)
