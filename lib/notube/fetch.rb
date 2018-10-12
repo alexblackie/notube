@@ -16,7 +16,7 @@ module Notube
     # @param channel_url [String] the full URL to the channel webpage.
     # @return [Notube::Models::Channel|nil]
     def add_channel(channel_url)
-      existing = @db.find_by(Models::Channel, "url", channel_url)
+      existing = @db.find_by(Models::Channel, url: channel_url)
       return existing unless existing.nil?
 
       opts = {
@@ -55,7 +55,7 @@ module Notube
         remote: resp["items"].first["snippet"]["thumbnails"]["high"]["url"]
       )
 
-      @db.find_by(Models::Channel, "external_id", external_id)
+      @db.find_by(Models::Channel, external_id: external_id)
     end
 
     # Get the last 25 videos for a channel and add them to the library (does not
@@ -74,7 +74,7 @@ module Notube
       resp["items"].each do |v|
         snippet = v["snippet"]
 
-        next if @db.find_by(Models::Video, "external_id", snippet["resourceId"]["videoId"])
+        next if @db.find_by(Models::Video, external_id: snippet["resourceId"]["videoId"])
 
         storage_dir = File.join(@storage_path, channel.external_id)
         FileUtils.mkdir_p(storage_dir)
