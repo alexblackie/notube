@@ -24,6 +24,12 @@ module Notube
       @db.execute(*args)
     end
 
+    def select(model, *args)
+      query(*args).map do |row|
+        model.new(row)
+      end
+    end
+
     def query(*args)
       return enum_for(:query, *args) unless block_given?
       result = @db.query(*args)
