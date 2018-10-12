@@ -4,14 +4,13 @@ module Notube
 
       TABLE_NAME = "channels".freeze
 
-      attr_reader :id, :external_id, :name, :url
+      attr_accessor :id, :external_id, :name, :url
 
-      # @param row [Array] the SQL result row
-      def initialize(row)
-        @id = row[0]
-        @external_id = row[1]
-        @url = row[2]
-        @name = row[3]
+      # @param row [Hash] the SQL result row
+      def initialize(attributes)
+        attributes.each_pair do |k, v|
+          public_send("#{k}=", v)
+        end
       end
 
     end

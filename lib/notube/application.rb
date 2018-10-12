@@ -6,7 +6,7 @@ module Notube
 
     get "/" do
       @channels = settings.db.execute("select id,external_id,name from channels")
-      @videos = settings.db.execute("select * from videos " +
+      @videos = settings.db.query("select * from videos " +
                   "order by videos.published_at desc limit 10").map do |row|
                     Models::Video.new(row)
                   end
@@ -17,7 +17,7 @@ module Notube
     get "/videos/:id" do
       @channels = settings.db.execute("select id,external_id,name from channels")
 
-      row = settings.db.execute("select * from videos " +
+      row = settings.db.query("select * from videos " +
               "where videos.id = ?", params[:id]).first
       @video = Models::Video.new(row)
 
@@ -31,7 +31,7 @@ module Notube
 
       @channels = settings.db.execute("select id,external_id,name from channels")
       @channel = settings.db.find(Models::Channel, params[:id])
-      video_rows = settings.db.execute("select * from videos " +
+      video_rows = settings.db.query("select * from videos " +
         "inner join channels on videos.channel_id = channels.id " +
         "where videos.channel_id = ? and published_at < ? " +
         "order by published_at desc limit 25", params[:id], params[:before])

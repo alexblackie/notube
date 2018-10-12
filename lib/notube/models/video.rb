@@ -4,18 +4,14 @@ module Notube
 
       TABLE_NAME = "videos".freeze
 
-      attr_reader :id, :external_id, :title, :description, :channel_id,
-                  :watched_at, :published_at
+      attr_accessor :id, :external_id, :title, :description, :channel_id,
+                    :watched_at, :published_at, :url, :name, :url
 
-      # @param row [Array] the SQL result row
-      def initialize(row)
-        @id = row[0]
-        @external_id = row[1]
-        @title = row[2]
-        @description = row[3]
-        @channel_id = row[4]
-        @watched_at = row[5]
-        @published_at = row[6]
+      # @param row [Hash] the SQL result row
+      def initialize(attributes)
+        attributes.each_pair do |k, v|
+          public_send("#{k}=", v)
+        end
       end
 
       # Has this video been watched?
