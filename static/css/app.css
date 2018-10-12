@@ -130,11 +130,15 @@ a {
  * Video Player Page
  ******************************************************************************/
 
-.video header {
+.channel-header {
+  padding-top: 6rem;
   margin: 1rem 0;
 }
-  .video header h2 {
+  .channel-header h2 {
+    display: inline-block;
     margin: 0;
+    padding: 0.5rem;
+    background: white;
   }
 .video .video-channel a {
     display: flex;

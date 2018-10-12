@@ -1,21 +1,21 @@
 <div class="video">
   <header>
-    <h2><%= @video[2] %></h2>
+    <h2><%= @video.title %></h2>
     <div class="video-channel">
-      <a href="/channels/<%= @video[4] %>">
-        <img src="/data/<%= @video[5] %>.jpg" width="24" height="24">
-        <span><%= @video[6] %></span>
+      <a href="/channels/<%= @video.channel_id %>">
+        <img src="/data/<%= @video.channel.external_id %>.jpg" width="24" height="24">
+        <span><%= @video.channel.name %></span>
       </a>
     </div>
   </header>
 
   <div class="video-player">
-    <video width="100%" controls="controls" poster="/data/<%= @video[5] %>/<%= @video[1] %>.jpg">
-      <source src="/data/<%= @video[5] %>/<%= @video[1] %>.webm">
+    <video width="100%" controls="controls" poster="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.jpg">
+      <source src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.webm">
     </video>
   </div>
 
   <div class="video-description">
-<%= @video[3] %>
+<%= @video.description %>
   </div>
 </div>
