@@ -100,19 +100,24 @@ a {
   box-sizing: border-box;
   padding: 0.5em;
   max-width: 20%;
-}
-.video-card.fresh .fresh-dot {
-  display: block;
+  opacity: 0.6;
 }
   .video-card img {
     width: 100%;
     height: auto;
   }
-  .video-card-channel a {
-    font-size: 0.8em;
-    color: inherit;
-    text-decoration: none;
+
+.video-card.fresh {
+  opacity: 1;
+}
+  .video-card.fresh .fresh-dot {
+    display: block;
   }
+.video-card-channel a {
+  font-size: 0.8em;
+  color: inherit;
+  text-decoration: none;
+}
 
 .fresh-dot {
     display: none;
