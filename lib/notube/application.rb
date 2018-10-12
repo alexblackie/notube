@@ -1,8 +1,13 @@
 module Notube
   class Application < Sinatra::Base
 
+    CONFIG = YAML.load_file(File.join(root, "..", "..", "config.yml")).freeze
+
     set :db, Notube::Database.new
     set :public_folder, Proc.new { File.join(root, "..", "..", "static") }
+    set :youtube_api_key, CONFIG["youtube_api_key"]
+    set :youtube_channels, CONFIG["youtube_channels"]
+    set :storage_path, CONFIG["storage_path"]
 
     get "/" do
       @channels = settings.db.execute("select id,external_id,name from channels")
@@ -40,6 +45,12 @@ module Notube
       @next_offset = @videos.last.published_at unless @videos.empty?
 
       erb :channel
+    end
+
+    get "/download/:id" do
+      video = settings.db.find(Models::Video, params[:id])
+      Notube::Fetch.new.download_video(video)
+      JSON.generate({ ok: true })
     end
 
   end

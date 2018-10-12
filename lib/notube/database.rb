@@ -13,7 +13,17 @@ module Notube
     # @param id [Integer] the ID to find
     # @return [model|nil] an instance of <model> with the row data; nil if not found.
     def find(model, id)
-      result = @db.query("select * from #{ model::TABLE_NAME } where #{ model::TABLE_NAME }.id = ? limit 1", id)
+      find_by(model, :id, id)
+    end
+
+    # Find a model by the given field.
+    #
+    # @param model [Class] the PORO object to hold the row data
+    # @param field [String] the column to filter on
+    # @param value [String] the value of the column to find
+    # @return [model|nil] an instance of <model> with the row data; nil if not found.
+    def find_by(model, field, value)
+      result = @db.query("select * from #{ model::TABLE_NAME } where #{ model::TABLE_NAME }.#{ field } = ? limit 1", value)
       row = result.next_hash
       return nil if row.nil?
       model.new(row)

@@ -5,13 +5,20 @@ module Notube
       TABLE_NAME = "videos".freeze
 
       attr_accessor :id, :external_id, :title, :description, :channel_id,
-                    :watched_at, :published_at, :url, :name, :url
+                    :watched_at, :published_at, :downloaded_at, :url, :name
 
       # Has this video been watched?
       #
       # @return [Boolean] true if watched_at has been set
       def watched?
         !@watched_at.nil?
+      end
+
+      # Has this video been downloaded?
+      #
+      # @return [Boolean] true if downloaded_at has been set
+      def downloaded?
+        !@downloaded_at.nil?
       end
 
       # Load the Channel object for this video.
