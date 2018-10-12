@@ -105,7 +105,7 @@ a {
   display: block;
 }
   .video-card img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
   }
   .video-card-channel a {
@@ -152,4 +152,10 @@ a {
   padding: 2rem 6rem;
   white-space: pre-wrap;
   line-height: 1.5em;
+}
+
+.video-download {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: palegoldenrod;
 }
