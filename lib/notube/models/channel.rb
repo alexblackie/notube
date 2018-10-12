@@ -4,7 +4,7 @@ module Notube
 
       TABLE_NAME = "channels".freeze
 
-      attr_reader :id, :external_id, :name, :url
+      attr_reader :id, :external_id, :name, :url, :playlist_id
 
       # @param row [Array] the SQL result row
       def initialize(row)
@@ -12,6 +12,7 @@ module Notube
         @external_id = row[1]
         @url = row[2]
         @name = row[3]
+        @playlist_id = row[4]
       end
 
     end

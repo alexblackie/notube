@@ -5,7 +5,7 @@ module Notube
       TABLE_NAME = "videos".freeze
 
       attr_reader :id, :external_id, :title, :description, :channel_id,
-                  :watched_at, :published_at
+                  :watched_at, :published_at, :downloaded_at
 
       # @param row [Array] the SQL result row
       def initialize(row)
@@ -16,6 +16,7 @@ module Notube
         @channel_id = row[4]
         @watched_at = row[5]
         @published_at = row[6]
+        @downloaded_at = row[7]
       end
 
       # Has this video been watched?
@@ -23,6 +24,13 @@ module Notube
       # @return [Boolean] true if watched_at has been set
       def watched?
         !@watched_at.nil?
+      end
+
+      # Has this video been downloaded?
+      #
+      # @return [Boolean] true if downloaded_at has been set
+      def downloaded?
+        !@downloaded_at.nil?
       end
 
       # Load the Channel object for this video.

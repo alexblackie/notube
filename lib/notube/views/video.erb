@@ -9,11 +9,32 @@
     </div>
   </header>
 
-  <div class="video-player">
-    <video width="100%" controls="controls" poster="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.jpg">
-      <source src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.webm">
-    </video>
-  </div>
+  <% if @video.downloaded? %>
+    <div class="video-player">
+      <video width="100%" controls="controls" poster="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.jpg">
+        <source src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.webm">
+        <source src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.mp4">
+      </video>
+    </div>
+  <% else %>
+    <div class="video-download">
+      This video has not yet been downloaded.
+      <a href="/download/<%= @video.id %>" id="downloadLink">Begin Download</a>
+    </div>
+
+    <script>
+      (function () {
+        let downloadLink = document.getElementById("downloadLink");
+
+        downloadLink.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          fetch(ev.currentTarget.getAttribute("href")).then(() => {
+            window.location.reload()
+          })
+        })
+      })();
+    </script>
+  <% end %>
 
   <div class="video-description">
 <%= @video.description %>
