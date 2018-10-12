@@ -1,12 +1,17 @@
 <div class="video">
-  <header>
+  <header class="video-header">
     <h2><%= @video.title %></h2>
-    <div class="video-channel">
-      <a href="/channels/<%= @video.channel_id %>">
+    <div class="video-meta">
+      <a class="video-meta-channel" href="/channels/<%= @video.channel_id %>">
         <img src="/data/<%= @video.channel.external_id %>.jpg" width="24" height="24">
         <span><%= @video.channel.name %></span>
       </a>
-    </div>
+
+      <div class="video-meta-published">Published <%= @video.display_timestamp(:published_at) %></div>
+      <% if @video.downloaded? %>
+      <div class="video-meta-downloaded">Downloaded <%= @video.display_timestamp(:downloaded_at) %></div>
+      <% end %>
+      <div class="video-meta-source"><a href="https://www.youtube.com/watch?v=<%= @video.external_id %>">Source &#x2197;</a></div>
   </header>
 
   <% if @video.downloaded? %>

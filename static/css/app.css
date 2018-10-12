@@ -7,11 +7,13 @@
   --palette-pink: #e667ca;
   --palette-white-dark: whitesmoke;
   --palette-grey: gainsboro;
+  --palette-grey-dark: grey;
 
   --color-highlight: var(--palette-teal);
   --color-highlight-alt: var(--palette-pink);
   --color-background-grey: var(--palette-white-dark);
   --color-border: var(--palette-grey);
+  --color-text-light: var(--palette-grey-dark);
 
   --height-header: 2rem;
   --padding-header: 1em;
@@ -95,7 +97,6 @@ a {
 
 .app-content {
   width: 100%;
-  padding: 1em;
 }
   .app-content h2 {
     margin: 0 0 1rem 0;
@@ -110,7 +111,13 @@ a {
   display: flex;
   flex-direction: space-between;
   flex-wrap: wrap;
+  padding: 1rem;
 }
+
+.video-cards-header {
+  padding: 1rem;
+}
+
 .video-card {
   position: relative;
   box-sizing: border-box;
@@ -150,23 +157,29 @@ a {
 /*******************************************************************************
  * Video Player Page
  ******************************************************************************/
-
-.channel-header {
-  padding-top: 6rem;
-  margin: 1rem 0;
+.video-header {
+  padding: 1rem;
+  background-color: var(--color-background-grey);
+  border-left: 1px solid var(--color-border);
 }
-  .channel-header h2 {
-    display: inline-block;
-    margin: 0;
-    padding: 0.5rem;
-    background: white;
+
+.video-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-light);
+}
+  .video-meta a {
+    color: inherit;
   }
-.video .video-channel a {
-    display: flex;
-    align-items: center;
-  }
-.video .video-channel img {
+
+.video-meta-channel {
+  display: flex;
+  align-items: center;
+}
+.video-meta-channel img {
   margin-right: 0.25rem;
+  border-radius: 100%;
 }
 
 .video-description {
@@ -176,7 +189,22 @@ a {
 }
 
 .video-download {
-  margin: 2rem 0;
   padding: 1rem;
   background: palegoldenrod;
 }
+
+
+/*******************************************************************************
+ * Channel page
+ ******************************************************************************/
+
+.channel-header {
+  padding-top: 8rem;
+  margin: 1rem 0;
+}
+  .channel-header h2 {
+    display: inline-block;
+    margin: 0;
+    padding: 0.5rem;
+    background: white;
+  }
