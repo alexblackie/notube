@@ -67,6 +67,7 @@ a {
 .app-sidebar {
   width: 20rem;
   background-color: var(--color-background-grey);
+  border-right: 1px solid var(--color-border);
 }
   .app-sidebar h2 {
     margin: 1rem 0;
@@ -159,8 +160,7 @@ a {
  ******************************************************************************/
 .video-header {
   padding: 1rem;
-  background-color: var(--color-background-grey);
-  border-left: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .video-meta {
@@ -200,7 +200,9 @@ a {
 
 .channel-header {
   padding-top: 8rem;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
   .channel-header h2 {
     display: inline-block;
