@@ -98,7 +98,7 @@ CONFIG["youtube_channels"].each do |channel_url|
   FileUtils.mkdir_p(storage_dir)
   Dir.chdir(storage_dir) do
     puts "Updating #{ channel_url }"
-    cmd(*%W[#{YOUTUBE_DL} --id -w --write-thumbnail -f webm/bestaudio --download-archive ../#{ external_id }.index #{ channel_url }])
+    cmd(*%W[#{YOUTUBE_DL} --id -w --write-thumbnail -f 248+251/bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' --download-archive ../#{ external_id }.index #{ channel_url }])
   end
 
   video_ids = File.read("#{ CONFIG["storage_path"] }/#{ external_id }.index").lines.map{|l| l.split.last}
