@@ -1,0 +1,8 @@
+<header class="video-cards-header">
+  <h2>Next Up</h2>
+</header>
+<div class="video-cards">
+  <% @videos.each do |v| %>
+    <%= erb :video_card, locals: { video: v } %>
+  <% end %>
+</div>

@@ -18,6 +18,15 @@ module Notube
       erb :home
     end
 
+    get "/next" do
+      @channels = settings.db.execute("select id,external_id,name from channels")
+      @videos = settings.db.select(Models::Video, <<-SQL)
+        select * from videos where watched_at is null order by videos.published_at desc limit 10
+      SQL
+
+      erb :next
+    end
+
     get "/videos/:id" do
       @channels = settings.db.execute("select id,external_id,name from channels")
 

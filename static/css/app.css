@@ -17,6 +17,7 @@
 
   --height-header: 2rem;
   --padding-header: 1em;
+  --width-sidebar: 16rem;
 }
 
 
@@ -39,12 +40,14 @@ a {
  ******************************************************************************/
 
 .app-header {
+  display: flex;
   padding: var(--padding-header);
   height: var(--height-header);
   background-color: var(--color-highlight);
 }
   .app-header h1 {
     margin: 0;
+    width: var(--width-sidebar);
     font-size: 1em;
   }
   .app-header a {
@@ -59,13 +62,23 @@ a {
     margin-right: 0.5rem;
   }
 
+  .app-header nav a {
+    display: inline-block;
+    height: var(--height-header);
+    line-height: var(--height-header);
+    padding: 0 var(--padding-header);
+  }
+  .app-header nav a:hover {
+    background-color: rgba(0,0,0, 0.1);
+  }
+
 .app-wrapper {
   display: flex;
   align-items: stretch;
 }
 
 .app-sidebar {
-  width: 20rem;
+  min-width: var(--width-sidebar);
   background-color: var(--color-background-grey);
   border-right: 1px solid var(--color-border);
 }
