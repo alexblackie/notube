@@ -37,7 +37,6 @@ module Notube
       @channel = settings.db.find(Models::Channel, params[:id])
       @videos = settings.db.select(Models::Video, <<-SQL, params[:id], params[:before])
         select * from videos
-        inner join channels on videos.channel_id = channels.id
         where videos.channel_id = ? and published_at < ?
         order by published_at desc limit 25
       SQL
