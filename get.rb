@@ -86,7 +86,7 @@ CONFIG["youtube_channels"].each do |channel_url|
 
   storage_dir = File.join(CONFIG["storage_path"], external_id)
 
-  Dir.mkdir(storage_dir) unless File.exist?(storage_dir)
+  FileUtils.mkdir_p(storage_dir)
   Dir.chdir(storage_dir) do
     puts "Updating #{ channel_url }"
     cmd(*%W[#{YOUTUBE_DL} --id -w --write-thumbnail -f webm/bestaudio --download-archive ../#{ external_id }.index #{ channel_url }])
