@@ -72,7 +72,7 @@ module Notube
         fetch.add_videos_for_channel(channel)
       end
 
-      head(200)
+      status(200)
     end
 
   end
