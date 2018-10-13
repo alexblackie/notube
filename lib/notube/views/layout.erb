@@ -16,6 +16,8 @@
       <a id="navHome" href="/">Next Up</a>
       <a id="navRecent" href="/recent">Recently Posted</a>
     </nav>
+
+    <a title="Check for new videos" class="app-header-sync" href="#">&#x27F3; Sync</a>
   </header>
 
   <div class="app-wrapper">
@@ -34,4 +36,17 @@
       <%= yield %>
     </div>
   </div>
+
+  <script>
+    (function () {
+      document.querySelector(".app-header-sync").addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.currentTarget.classList.add("loading");
+        ev.currentTarget.innerHTML = "Updating&hellip;";
+        fetch("/refresh", { method: "POST" }).then(() => {
+          window.location.reload();
+        });
+      });
+    })();
+  </script>
 </body>

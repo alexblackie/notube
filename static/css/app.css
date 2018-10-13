@@ -62,7 +62,11 @@ a {
     margin-right: 0.5rem;
   }
 
-  .app-header nav a {
+  .app-header nav {
+    flex-grow: 1;
+  }
+  .app-header nav a,
+  .app-header-sync {
     display: inline-block;
     height: var(--height-header);
     line-height: var(--height-header);
@@ -76,6 +80,13 @@ a {
   .app-header nav .current {
     background: rgba(255,255,255, 0.9);
     color: var(--color-highlight);
+  }
+
+.app-header-sync {
+  background-color: rgba(255,255,255, 0.25);
+}
+  .app-header-sync.loading {
+    opacity: 0.75;
   }
 
 .app-wrapper {

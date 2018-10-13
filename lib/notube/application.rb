@@ -63,5 +63,17 @@ module Notube
       JSON.generate({ ok: true })
     end
 
+    post "/refresh" do
+      fetch = Notube::Fetch.new
+
+      Notube::Application.settings.youtube_channels.map do |channel_url|
+        fetch.add_channel(channel_url)
+      end.each do |channel|
+        fetch.add_videos_for_channel(channel)
+      end
+
+      head(200)
+    end
+
   end
 end
