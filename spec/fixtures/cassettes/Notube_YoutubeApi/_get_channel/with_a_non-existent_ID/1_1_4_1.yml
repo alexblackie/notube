@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/channels?id=UCEEEEEEEEEEEEEEEEEEE&key=<YOUTUBE_API_KEY>&part=snippet%2CbrandingSettings%2CcontentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      expires:
+      - Sun, 14 Oct 2018 13:46:56 GMT
+      date:
+      - Sun, 14 Oct 2018 13:46:56 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      etag:
+      - '"XI7nbFXulYBIpL0ayR_gDh3eu1k/ftqcoEi5lFrDLEyLbPZCiTrEzXU"'
+      vary:
+      - Origin, X-Origin
+      content-type:
+      - application/json; charset=UTF-8
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      alt-svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+         "kind": "youtube#channelListResponse",
+         "etag": "\"XI7nbFXulYBIpL0ayR_gDh3eu1k/ftqcoEi5lFrDLEyLbPZCiTrEzXU\"",
+         "pageInfo": {
+          "totalResults": 0,
+          "resultsPerPage": 0
+         },
+         "items": []
+        }
+    http_version: 
+  recorded_at: Sun, 14 Oct 2018 13:46:56 GMT
+recorded_with: VCR 4.0.0

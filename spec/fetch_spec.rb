@@ -27,7 +27,7 @@ RSpec.describe Notube::Fetch, :vcr do
       it { is_expected.to be_a Notube::Models::Channel }
 
       it "does not call the API" do
-        expect(service).to_not receive :api
+        expect_any_instance_of(Notube::YoutubeApi).to_not receive :get_channel
         subject
       end
     end
@@ -36,6 +36,16 @@ RSpec.describe Notube::Fetch, :vcr do
       let(:url) { "https://www.youtube.com/user/asdfasdfadsfasdfasdfasdfasdf99999" }
 
       it { is_expected.to be_nil }
+    end
+
+  end
+
+  describe "#add_videos_for_channel" do
+    let(:channel) do
+    end
+    subject { service.add_videos_for_channel(channel) }
+
+    it "creates video records" do
     end
 
   end
