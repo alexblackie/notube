@@ -37,6 +37,7 @@ GEM
       tilt (~> 2.0)
     sqlite3 (1.3.13)
     tilt (2.0.8)
+    vcr (4.0.0)
 
 PLATFORMS
   ruby
@@ -49,6 +50,7 @@ DEPENDENCIES
   shotgun
   sinatra
   sqlite3
+  vcr
 
 BUNDLED WITH
    1.16.6

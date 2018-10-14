@@ -9,4 +9,5 @@ gem "shotgun"
 group :development, :test do
   gem "pry"
   gem "rspec"
+  gem "vcr"
 end
