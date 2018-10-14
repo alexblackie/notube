@@ -1,4 +1,5 @@
 language: ruby
+cache: bundler
 install:
   - bundle install
   - cp config.yml.test config.yml
