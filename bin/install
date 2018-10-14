@@ -1,0 +1,65 @@
+#!/bin/sh
+
+##
+# This script installs notube on a production server.
+#
+# Before running, ensure you have installed:
+#
+#    - Ruby and its development headers
+#    - The `bundler` gem
+#    - SQLite development headers
+#    - A compiler toolchain (gcc, make, etc)
+#
+##
+
+set -e
+
+NOTUBE_USER="notube"
+INSTALL_DIR="$(pwd)"
+
+main() {
+  create_user
+  install_dependencies
+  install_service
+  enable_service
+}
+
+create_user() {
+  log "Adding $NOTUBE_USER user..."
+
+  if ! getent passwd "$NOTUBE_USER" >/dev/null ; then
+    useradd -m "$NOTUBE_USER"
+  fi
+
+  log "Updating permissions on $INSTALL_DIR..."
+  chown -R "$NOTUBE_USER" "$INSTALL_DIR"
+}
+
+install_dependencies() {
+  cd "$INSTALL_DIR"
+  log "Installing dependencies..."
+  su -c "bundle install --path vendor/bundle --without development" "$NOTUBE_USER"
+  cd - >/dev/null
+}
+
+install_service() {
+  log "Installing systemd service..."
+  cp "$INSTALL_DIR/notube.service" /etc/systemd/system/notube.service
+  systemctl daemon-reload
+}
+
+enable_service() {
+  systemctl enable notube
+  systemctl start notube
+}
+
+# private
+
+log() {
+  echo
+  echo
+  echo "----> $@"
+  echo
+}
+
+main

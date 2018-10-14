@@ -1,0 +1,4 @@
+#!/bin/sh
+
+VERSION=$(cat VERSION)
+tar -czf "notube-$VERSION.tar.gz" $(git ls-files)
