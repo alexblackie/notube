@@ -1,6 +1,8 @@
 module Notube
   class Database
 
+    attr_reader :db
+
     def initialize
       environment = ENV.fetch("RACK_ENV", "development")
       @db = SQLite3::Database.new("#{ environment }.db")
