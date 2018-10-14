@@ -1,0 +1,6 @@
+language: ruby
+install:
+  - bundle install
+  - cp config.yml.test config.yml
+script:
+  - bundle exec rspec
