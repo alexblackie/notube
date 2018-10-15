@@ -1,5 +1,3 @@
-require 'digest'
-
 module Notube
   class Application < Sinatra::Base
 
