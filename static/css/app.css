@@ -139,17 +139,15 @@ a {
  ******************************************************************************/
 
 .video-cards {
-  display: flex;
-  flex-direction: space-between;
-  flex-wrap: wrap;
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+  padding: 1em;
 }
 
 .video-card {
   position: relative;
   box-sizing: border-box;
-  padding: 0.5em;
-  max-width: 20%;
   opacity: 0.6;
 }
   .video-card img {
