@@ -43,7 +43,17 @@ a {
   display: grid;
 
   grid-template-areas: "logo     nav"
-                       "sidebar  main"
+                       "sidebar  main";
+}
+
+@media (max-width: 800px) {
+  /* On small screens, move channels and logo */
+  .app-wrapper {
+    grid-template-areas: "logo"
+                         "nav"
+                         "main"
+                         "sidebar";
+  }
 }
 
 .app-header {
