@@ -11,14 +11,14 @@ module Notube
       #
       # @return [Boolean] true if watched_at has been set
       def watched?
-        !@watched_at.nil?
+        !watched_at.nil?
       end
 
       # Has this video been downloaded?
       #
       # @return [Boolean] true if downloaded_at has been set
       def downloaded?
-        !@downloaded_at.nil?
+        !downloaded_at.nil?
       end
 
       # Load the Channel object for this video.

@@ -2,3 +2,4 @@
 /config.yml
 /*.db
 /*.tar.gz
+/spec/examples.txt

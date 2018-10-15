@@ -46,6 +46,14 @@ $ bundle exec rackup
 The app will create and setup the database for you on-boot, and will listen on
 `127.0.0.1:9292`.
 
+## Testing
+
+There is an automated test suite included. Simply invoke `rspec`:
+
+```
+$ bundle exec rspec
+```
+
 ## Deployment
 
 Notube provides no authentication and no security guarantees of any sort, so it

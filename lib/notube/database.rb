@@ -1,6 +1,8 @@
 module Notube
   class Database
 
+    attr_reader :db
+
     def initialize
       environment = ENV.fetch("RACK_ENV", "development")
       @db = SQLite3::Database.new("#{ environment }.db")
@@ -36,6 +38,10 @@ module Notube
     # Fall through to SQLite directly for complex queries.
     def execute(*args)
       @db.execute(*args)
+    end
+
+    def execute_batch(*args)
+      @db.execute_batch(*args)
     end
 
     def select(model, *args)
