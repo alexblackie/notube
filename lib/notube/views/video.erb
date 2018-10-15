@@ -24,19 +24,25 @@
   <% else %>
     <div class="video-download">
       This video has not yet been downloaded.
-      <a href="/download/<%= @video.id %>" id="downloadLink">Begin Download</a>
+      <a href="/download/<%= @video.id %>" class="js-download-link">Begin Download</a>
     </div>
+
+    <a href="/download/<%= @video.id %>" class="video-preview-download js-download-link" style="display: block;">
+      <img src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.jpg" width="100%">
+    </a>
 
     <script>
       (function () {
-        let downloadLink = document.getElementById("downloadLink");
+        let downloadLinks = document.querySelectorAll(".js-download-link");
 
-        downloadLink.addEventListener("click", function(ev) {
-          ev.preventDefault();
-          fetch(ev.currentTarget.getAttribute("href")).then(() => {
-            window.location.reload()
+        downloadLinks.forEach(function (el) {
+          el.addEventListener("click", function(ev) {
+            ev.preventDefault();
+            fetch(ev.currentTarget.getAttribute("href")).then(() => {
+              window.location.reload()
+            })
           })
-        })
+        );
       })();
     </script>
   <% end %>
