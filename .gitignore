@@ -1,3 +1,4 @@
 /static/data
 /config.yml
 /*.db
+/*.tar.gz
