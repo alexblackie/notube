@@ -104,7 +104,7 @@ module Notube
       FileUtils.mkdir_p(storage_dir)
 
       Dir.chdir(storage_dir) do
-        cmd(*%W[#{YOUTUBE_DL} --id -f 248+251/bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' -- #{ video.external_id }])
+        cmd(*%W[#{YOUTUBE_DL} --id -f 248+251/bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4 -- #{ video.external_id }])
       end
 
       @db.execute("update videos set downloaded_at = CURRENT_TIMESTAMP where id = ?", video.id)
