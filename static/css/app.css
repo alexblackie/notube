@@ -140,9 +140,26 @@ a {
 
 .video-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1em;
   padding: 1em;
+}
+
+@media (min-width: 800px) {
+  .video-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .video-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1600px) {
+  .video-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .video-card {
