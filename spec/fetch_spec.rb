@@ -42,10 +42,19 @@ RSpec.describe Notube::Fetch, :vcr do
 
   describe "#add_videos_for_channel" do
     let(:channel) do
+      Notube::Models::Channel.new(
+        id: 123,
+        url: "https://www.youtube.com/user/Maangchi",
+        external_id: "UC8gFadPgK2r1ndqLI04Xvvw",
+        playlist_id: "UU8gFadPgK2r1ndqLI04Xvvw"
+      )
     end
     subject { service.add_videos_for_channel(channel) }
 
     it "creates video records" do
+      # TODO find a way to not make this insert 24 more records than we need
+      query = -> { db.execute("select count(1) from videos where channel_id = ?", 123) }
+      expect{ subject }.to change{ query.call.first.first }.by(25)
     end
 
   end
