@@ -7,6 +7,7 @@ module Notube
 
     set :db, Notube::Database.new
     set :public_folder, Proc.new { File.join(root, "..", "..", "static") }
+    set :static_cache_control, [:public, max_age: 3600]
     set :youtube_api_key, CONFIG["youtube_api_key"]
     set :youtube_channels, CONFIG["youtube_channels"]
     set :storage_path, CONFIG["storage_path"]
