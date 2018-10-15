@@ -42,50 +42,55 @@ a {
 .app-wrapper {
   display: grid;
 
-  grid-template-areas: "head     head"
+  grid-template-areas: "logo     nav"
                        "sidebar  main"
 }
 
 .app-header {
-  grid-area: head;
-  display: flex;
   padding: var(--padding-header);
   height: var(--height-header);
   background-color: var(--color-highlight);
+  display: flex;
 }
-  .app-header h1 {
-    margin: 0;
-    width: var(--width-sidebar);
-    font-size: 1em;
-  }
   .app-header a {
     display: flex;
     align-items: center;
     text-decoration: none;
     color: white;
   }
-  .app-header img {
+
+.app-logo {
+  grid-area: logo;
+  margin: 0;
+  font-size: 1em;
+}
+
+  .app-logo img {
     height: var(--height-header);
     width: var(--height-header);
     margin-right: 0.5rem;
   }
 
-  .app-header nav {
+.app-nav {
+  grid-area: nav;
+}
+
+  .app-nav nav {
     flex-grow: 1;
   }
-  .app-header nav a,
+  .app-nav nav a,
   .app-header-sync {
     display: inline-block;
     height: var(--height-header);
     line-height: var(--height-header);
     padding: 0 var(--padding-header);
   }
-  .app-header nav a:hover {
+  .app-nav nav a:hover {
     background-color: rgba(0,0,0, 0.1);
   }
   .page-home #navHome,
   .page-recent #navRecent,
-  .app-header nav .current {
+  .app-nav nav .current {
     background: rgba(255,255,255, 0.9);
     color: var(--color-highlight);
   }
