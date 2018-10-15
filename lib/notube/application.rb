@@ -1,3 +1,5 @@
+require 'digest'
+
 module Notube
   class Application < Sinatra::Base
 
@@ -8,6 +10,14 @@ module Notube
     set :youtube_api_key, CONFIG["youtube_api_key"]
     set :youtube_channels, CONFIG["youtube_channels"]
     set :storage_path, CONFIG["storage_path"]
+
+    helpers do
+      def static_digest(static_path)
+        abspath = File.join(settings.public_folder, static_path)
+        data = File.read(abspath)
+        "#{static_path}?#{Digest::MD5.hexdigest(data)}"
+      end
+    end
 
     get "/" do
       @page_class = "page-home"
