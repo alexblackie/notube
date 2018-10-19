@@ -3,7 +3,6 @@ module Notube
 
     YOUTUBE_API_URL = "https://www.googleapis.com/".freeze
     YOUTUBE_API_PREFIX = "/youtube/v3".freeze
-    YOUTUBE_DL = "/usr/bin/youtube-dl".freeze
 
     # @param api_key [String] API key for Youtube Data API V3
     def initialize(api_key: )

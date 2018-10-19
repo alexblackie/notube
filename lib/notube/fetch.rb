@@ -1,5 +1,8 @@
+require 'open3'
+
 module Notube
   class Fetch
+    YOUTUBE_DL = "/usr/bin/youtube-dl".freeze
 
     # @param youtube_api [Class] the Youtube API class to use
     def initialize(youtube_api: YoutubeApi)
@@ -93,6 +96,18 @@ module Notube
       end
 
       @db.execute("update videos set downloaded_at = CURRENT_TIMESTAMP where id = ?", video.id)
+    end
+
+    def get_video_url(video)
+      video = video.external_id if video.respond_to?(:external_id)
+
+      args = %W[#{YOUTUBE_DL} -g --id -f best -- #{video}]
+      Open3.popen2(*args) do |stdin, stdout, wait_thr|
+        stdin.close
+        result = stdout.read
+        raise "youtube-dl failed" unless wait_thr.value.success?
+        return result.rstrip
+      end
     end
 
     private
