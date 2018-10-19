@@ -3,6 +3,10 @@ ENV["RACK_ENV"] ||= "test"
 require "notube"
 require "vcr"
 
+Notube::Application.set :storage_path, "static/data"
+Notube::Application.set :youtube_api_key, "FAKE"
+Notube::Application.set :youtube_channels, []
+
 Notube::Application.settings.db.create_database
 
 VCR.configure do |config|

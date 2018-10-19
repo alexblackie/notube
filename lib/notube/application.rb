@@ -1,15 +1,28 @@
 module Notube
   class Application < Sinatra::Base
 
-    CONFIG = YAML.load_file(File.join(root, "..", "..", "config.yml")).freeze
-
     set :db, Notube::Database.new
     set :public_folder, Proc.new { File.join(root, "..", "..", "static") }
     set :static_cache_control, [:public, max_age: 3600]
-    set :youtube_api_key, CONFIG["youtube_api_key"]
-    set :youtube_channels, CONFIG["youtube_channels"]
-    set :storage_path, CONFIG["storage_path"]
+    set :youtube_api_key, nil
+    set :youtube_channels, []
+    set :storage_path, "static/data"
     set :per_page, 30
+
+    CONFIG_KEYS = %i[
+      youtube_api_key
+      youtube_channels
+      storage_path
+    ].freeze
+
+    def self.load_config_file(filename)
+      config = YAML.load_file(config_path).freeze
+
+      CONFIG_KEYS.each do |key|
+        next unless config.has_key?(key)
+        set key, config[key]
+      end
+    end
 
     helpers do
       def static_digest(static_path)
