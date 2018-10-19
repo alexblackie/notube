@@ -8,9 +8,6 @@
       </a>
 
       <div class="video-meta-published">Published <%= @video.display_timestamp(:published_at) %></div>
-      <% if @video.downloaded? %>
-      <div class="video-meta-downloaded">Downloaded <%= @video.display_timestamp(:downloaded_at) %></div>
-      <% end %>
       <div class="video-meta-source"><a href="https://www.youtube.com/watch?v=<%= @video.external_id %>">Source &#x2197;</a></div>
   </header>
 
@@ -22,14 +19,16 @@
       </video>
     </div>
   <% else %>
+    <div class="video-player">
+    </div>
     <div class="video-download">
       This video has not yet been downloaded.
-      <a href="/download/<%= @video.id %>" class="js-download-link">Begin Download</a>
-    </div>
+      <a href="/get_video_url/<%= @video.external_id %>" class="js-download-link">Begin Download</a>
 
-    <a href="/download/<%= @video.id %>" class="video-preview-download js-download-link" style="display: block;">
-      <img src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.jpg" width="100%">
-    </a>
+      <a href="/get_video_url/<%= @video.external_id %>" class="video-preview-download js-download-link" style="display: block;">
+        <img src="/data/<%= @video.channel.external_id %>/<%= @video.external_id %>.jpg" width="100%">
+      </a>
+    </div>
 
     <script>
       (function () {
@@ -38,9 +37,35 @@
         downloadLinks.forEach(function (el) {
           el.addEventListener("click", function(ev) {
             ev.preventDefault();
-            fetch(ev.currentTarget.getAttribute("href")).then(() => {
-              window.location.reload()
-            })
+
+            const videoDownload = document.querySelector(".video-download");
+            const videoPlayer = document.querySelector(".video-player");
+
+            videoDownload.disabled = true;
+            videoDownload.style.opacity = 0.5;
+            videoDownload.style.pointerEvents = "none";
+
+            fetch(ev.currentTarget.getAttribute("href"))
+              .then(function(response) {
+                return response.json();
+              })
+              .then(function(data) {
+                console.log(JSON.stringify(data));
+
+                videoDownload.style.display = "none";
+
+                // <video width="100%" controls="controls">
+                const video = document.createElement("video");
+                video.style.width = "100%";
+                video.controls = true;
+
+                // <source src="...">
+                const source = document.createElement("source")
+                source.src = data.url;
+
+                video.appendChild(source);
+                videoPlayer.appendChild(video);
+              });
           })
         });
       })();
