@@ -9,6 +9,7 @@ module Notube
     set :youtube_api_key, CONFIG["youtube_api_key"]
     set :youtube_channels, CONFIG["youtube_channels"]
     set :storage_path, CONFIG["storage_path"]
+    set :per_page, 30
 
     helpers do
       def static_digest(static_path)
@@ -22,7 +23,7 @@ module Notube
       @page_class = "page-home"
       @channels = settings.db.execute("select id,external_id,name from channels")
       @videos = settings.db.select(Models::Video, <<-SQL)
-        select * from videos where watched_at is null order by videos.published_at desc limit 10
+        select * from videos where watched_at is null order by videos.published_at desc limit #{settings.per_page}
       SQL
 
       erb :next
@@ -32,7 +33,7 @@ module Notube
       @page_class = "page-recent"
       @channels = settings.db.execute("select id,external_id,name from channels")
       @videos = settings.db.select(Models::Video, <<-SQL)
-        select * from videos order by videos.published_at desc limit 10
+        select * from videos order by videos.published_at desc limit #{settings.per_page}
       SQL
 
       erb :recent
@@ -58,7 +59,7 @@ module Notube
       @videos = settings.db.select(Models::Video, <<-SQL, params[:id], params[:before])
         select * from videos
         where videos.channel_id = ? and published_at < ?
-        order by published_at desc limit 25
+        order by published_at desc limit #{settings.per_page}
       SQL
 
       @next_offset = @videos.last.published_at unless @videos.empty?

@@ -1,14 +1,11 @@
 module Notube
   class Fetch
 
-    YOUTUBE_API_URL = "https://www.googleapis.com/".freeze
-    YOUTUBE_API_PREFIX = "/youtube/v3".freeze
-    YOUTUBE_DL = "/usr/bin/youtube-dl".freeze
-
-    def initialize
+    # @param youtube_api [Class] the Youtube API class to use
+    def initialize(youtube_api: YoutubeApi)
       @db = Application.settings.db
       @storage_path = Application.settings.storage_path
-      @youtube_api_key = Application.settings.youtube_api_key
+      @youtube_api = youtube_api.new(api_key: Application.settings.youtube_api_key)
     end
 
     # Import channel to library.
@@ -19,40 +16,33 @@ module Notube
       existing = @db.find_by(Models::Channel, url: channel_url)
       return existing unless existing.nil?
 
-      opts = {
-        part: "snippet,brandingSettings,contentDetails",
-        key: @youtube_api_key
-      }
-
       channel_url_id = channel_url.split("/").last
-      if channel_url.match?(/\/user\//)
-        opts[:forUsername] = channel_url_id
+      channel = if channel_url.match?(/user\//)
+        @youtube_api.get_channel(username: channel_url_id)
       else
-        opts[:id] = channel_url_id
+        @youtube_api.get_channel(id: channel_url_id)
       end
 
-      resp = api.get(api_path("channels"), opts)
-      resp = JSON.parse(resp.body)
 
-      if resp["items"].empty?
+      unless channel
         warn "Could not find channel #{ channel_url }. Skipping"
         return
       end
 
-      external_id = resp["items"].first["id"]
-      title = resp["items"].first["snippet"]["title"]
-      playlist_id = resp["items"].first["contentDetails"]["relatedPlaylists"]["uploads"]
+      external_id = channel["id"]
+      title = channel["snippet"]["title"]
+      playlist_id = channel["contentDetails"]["relatedPlaylists"]["uploads"]
       @db.execute("insert into channels (external_id, name, url, playlist_id) values (?, ?, ?, ?)",
-                  external_id, title, channel_url, playlist_id)
+                  [external_id, title, channel_url, playlist_id])
 
       download_image(
         local: "#{ @storage_path }/#{ external_id }.banner.jpg",
-        remote: resp["items"].first["brandingSettings"]["image"]["bannerImageUrl"]
+        remote: channel["brandingSettings"]["image"]["bannerImageUrl"]
       )
 
       download_image(
         local: "#{ @storage_path }/#{ external_id }.jpg",
-        remote: resp["items"].first["snippet"]["thumbnails"]["high"]["url"]
+        remote: channel["snippet"]["thumbnails"]["high"]["url"]
       )
 
       @db.find_by(Models::Channel, external_id: external_id)
@@ -63,15 +53,7 @@ module Notube
     #
     # @param channel [Notube::Models::Channel]
     def add_videos_for_channel(channel)
-      resp = api.get(api_path("playlistItems"), {
-        playlistId: channel.playlist_id,
-        part: "snippet",
-        maxResults: 25,
-        key: @youtube_api_key
-      })
-      resp = JSON.parse(resp.body)
-
-      resp["items"].each do |v|
+      @youtube_api.get_videos(channel: channel).each do |v|
         snippet = v["snippet"]
 
         next if @db.find_by(Models::Video, external_id: snippet["resourceId"]["videoId"])
@@ -91,8 +73,11 @@ module Notube
           remote: thumb["url"]
         )
 
-        @db.execute("insert into videos (external_id,title,description,channel_id,published_at) values(?, ?, ?, ?, ?)",
-                   snippet["resourceId"]["videoId"], snippet["title"], snippet["description"], channel.id, snippet["publishedAt"])
+        @db.execute(<<-SQL, [snippet["resourceId"]["videoId"], snippet["title"], snippet["description"], channel.id, snippet["publishedAt"]])
+          insert into videos (
+            external_id, title, description, channel_id, published_at
+          ) values(?, ?, ?, ?, ?)
+        SQL
       end
     end
 
@@ -104,24 +89,13 @@ module Notube
       FileUtils.mkdir_p(storage_dir)
 
       Dir.chdir(storage_dir) do
-        cmd(*%W[#{YOUTUBE_DL} --id -f 248+251/bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4' #{ video.external_id }])
+        cmd(*%W[#{YOUTUBE_DL} --id -f 248+251/bestvideo[ext=mp4]+bestaudio[ext=m4a]/mp4 -- #{ video.external_id }])
       end
 
       @db.execute("update videos set downloaded_at = CURRENT_TIMESTAMP where id = ?", video.id)
     end
 
     private
-
-    def api
-      Faraday.new(url: YOUTUBE_API_URL) do |faraday|
-        faraday.request :url_encoded
-        faraday.adapter Faraday.default_adapter
-      end
-    end
-
-    def api_path(path)
-      [YOUTUBE_API_PREFIX, path].join("/")
-    end
 
     def cmd(*args)
       puts args.join(" ")

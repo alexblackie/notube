@@ -1,0 +1,142 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.googleapis.com/youtube/v3/channels?forUsername=Maangchi&key=<YOUTUBE_API_KEY>&part=snippet%2CbrandingSettings%2CcontentDetails
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      expires:
+      - Sun, 14 Oct 2018 13:46:55 GMT
+      date:
+      - Sun, 14 Oct 2018 13:46:55 GMT
+      cache-control:
+      - private, max-age=0, must-revalidate, no-transform
+      etag:
+      - '"XI7nbFXulYBIpL0ayR_gDh3eu1k/1jXWY9WW650KX4k8nx22cM-_J1s"'
+      vary:
+      - Origin, X-Origin
+      content-type:
+      - application/json; charset=UTF-8
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      server:
+      - GSE
+      alt-svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+      connection:
+      - close
+      transfer-encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+         "kind": "youtube#channelListResponse",
+         "etag": "\"XI7nbFXulYBIpL0ayR_gDh3eu1k/1jXWY9WW650KX4k8nx22cM-_J1s\"",
+         "pageInfo": {
+          "totalResults": 1,
+          "resultsPerPage": 5
+         },
+         "items": [
+          {
+           "kind": "youtube#channel",
+           "etag": "\"XI7nbFXulYBIpL0ayR_gDh3eu1k/ExuSyNh70oxDS_BBZtUlSSokhxo\"",
+           "id": "UC8gFadPgK2r1ndqLI04Xvvw",
+           "snippet": {
+            "title": "Maangchi",
+            "description": "Hi! I'm Maangchi! My channel is all about cooking, eating, and enjoying Korean cuisine with your family and friends.\n\nCooking wholesome and delicious food and sharing it with loved ones is very important for me, so here you'll find the best of my best recipes. If you like food, and like sharing food with other people, we're going to be instant friends!\n\nThank you for your interest in my recipes & take care!",
+            "customUrl": "Maangchi",
+            "publishedAt": "2007-04-03T12:43:17.000Z",
+            "thumbnails": {
+             "default": {
+              "url": "https://yt3.ggpht.com/a-/AN66SAw84MRh0YZ8xx_Jlujpu_4x2o3thmwPU96evQ=s88-mo-c-c0xffffffff-rj-k-no",
+              "width": 88,
+              "height": 88
+             },
+             "medium": {
+              "url": "https://yt3.ggpht.com/a-/AN66SAw84MRh0YZ8xx_Jlujpu_4x2o3thmwPU96evQ=s240-mo-c-c0xffffffff-rj-k-no",
+              "width": 240,
+              "height": 240
+             },
+             "high": {
+              "url": "https://yt3.ggpht.com/a-/AN66SAw84MRh0YZ8xx_Jlujpu_4x2o3thmwPU96evQ=s800-mo-c-c0xffffffff-rj-k-no",
+              "width": 800,
+              "height": 800
+             }
+            },
+            "localized": {
+             "title": "Maangchi",
+             "description": "Hi! I'm Maangchi! My channel is all about cooking, eating, and enjoying Korean cuisine with your family and friends.\n\nCooking wholesome and delicious food and sharing it with loved ones is very important for me, so here you'll find the best of my best recipes. If you like food, and like sharing food with other people, we're going to be instant friends!\n\nThank you for your interest in my recipes & take care!"
+            },
+            "country": "US"
+           },
+           "contentDetails": {
+            "relatedPlaylists": {
+             "uploads": "UU8gFadPgK2r1ndqLI04Xvvw",
+             "watchHistory": "HL",
+             "watchLater": "WL"
+            }
+           },
+           "brandingSettings": {
+            "channel": {
+             "title": "Maangchi",
+             "description": "Hi! I'm Maangchi! My channel is all about cooking, eating, and enjoying Korean cuisine with your family and friends.\n\nCooking wholesome and delicious food and sharing it with loved ones is very important for me, so here you'll find the best of my best recipes. If you like food, and like sharing food with other people, we're going to be instant friends!\n\nThank you for your interest in my recipes & take care!",
+             "keywords": "\"Korean food\" \"Korean cooking\" Maangchi \"Korean recipe\" \"Korean cuisine\" \"Korean authentic recipe\" \"travel cooking\" \"Korean kitchen\" cooking \"YouTube video recipe\"",
+             "defaultTab": "Featured",
+             "trackingAnalyticsAccountId": "UA-23067434-1",
+             "showRelatedChannels": true,
+             "showBrowseView": true,
+             "featuredChannelsTitle": "My Korean food vocab channel",
+             "featuredChannelsUrls": [
+              "UCqtiEWkAdE3MpHOX2n_dtAA"
+             ],
+             "unsubscribedTrailer": "PGhKwCq7SZk",
+             "profileColor": "#000000",
+             "country": "US"
+            },
+            "image": {
+             "bannerImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1060-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+             "bannerMobileImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w640-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+             "bannerTabletLowImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1138-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+             "bannerTabletImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1707-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+             "bannerTabletHdImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w2276-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+             "bannerTabletExtraHdImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w2560-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no",
+             "bannerMobileLowImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w320-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+             "bannerMobileMediumHdImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w960-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+             "bannerMobileHdImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1280-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+             "bannerMobileExtraHdImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1440-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no",
+             "bannerTvImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w2120-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no",
+             "bannerTvLowImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w854-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no",
+             "bannerTvMediumImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1280-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no",
+             "bannerTvHighImageUrl": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w1920-fcrop64=1,00000000ffffffff-nd-c0xffffffff-rj-k-no"
+            },
+            "hints": [
+             {
+              "property": "channel.featured_tab.template.string",
+              "value": "Everything"
+             },
+             {
+              "property": "channel.banner.mobile.medium.image.url",
+              "value": "https://yt3.ggpht.com/xzj9uLcPGRS9TVIenqAGfpBjkvf3FHdZVSMRfQQUhTO1rNGtdLk9RsIjM1lxNCDx3uJljP-t=w640-fcrop64=1,32b75a57cd48a5a8-nd-c0xffffffff-rj-k-no"
+             }
+            ]
+           }
+          }
+         ]
+        }
+    http_version: 
+  recorded_at: Sun, 14 Oct 2018 13:46:56 GMT
+recorded_with: VCR 4.0.0
