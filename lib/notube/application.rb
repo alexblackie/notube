@@ -5,10 +5,19 @@ module Notube
 
     set :db, Notube::Database.new
     set :public_folder, Proc.new { File.join(root, "..", "..", "static") }
+    set :static_cache_control, [:public, max_age: 3600]
     set :youtube_api_key, CONFIG["youtube_api_key"]
     set :youtube_channels, CONFIG["youtube_channels"]
     set :storage_path, CONFIG["storage_path"]
     set :per_page, 30
+
+    helpers do
+      def static_digest(static_path)
+        abspath = File.join(settings.public_folder, static_path)
+        data = File.read(abspath)
+        "#{static_path}?#{Digest::MD5.hexdigest(data)}"
+      end
+    end
 
     get "/" do
       @page_class = "page-home"

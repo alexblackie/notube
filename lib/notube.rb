@@ -3,6 +3,7 @@ require "yaml"
 require "open-uri"
 require "faraday"
 require "sqlite3"
+require 'digest'
 require "pry" unless production?
 
 require "notube/database"
