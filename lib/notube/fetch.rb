@@ -1,6 +1,8 @@
 module Notube
   class Fetch
 
+    YOUTUBE_DL = "/usr/bin/youtube-dl".freeze
+
     # @param youtube_api [Class] the Youtube API class to use
     def initialize(youtube_api: YoutubeApi)
       @db = Application.settings.db
