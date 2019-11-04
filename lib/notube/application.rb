@@ -73,6 +73,11 @@ module Notube
       JSON.generate({ ok: true })
     end
 
+    get "/get_video_url/:external_id" do
+      url = Notube::Fetch.new.get_video_url(params[:external_id])
+      JSON.generate({ url: url })
+    end
+
     post "/refresh" do
       fetch = Notube::Fetch.new
 
